@@ -5,7 +5,7 @@ import "./styles/app.css";
 function App() {
   return (
     <div className="App">
-      <AddButton label="Add" />
+      <AddButton />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>

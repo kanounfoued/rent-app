@@ -8,7 +8,7 @@ type Props = {
   icon?: ReactNode;
   onClick?: () => void;
 };
-export default function AddButton({
+export default function DeleteButton({
   onClick,
   type = "default",
   size = "small",
@@ -16,7 +16,7 @@ export default function AddButton({
 }: Props) {
   return (
     <CustomButton
-      label="Add"
+      label="Delete"
       onClick={onClick}
       type={type}
       size={size}
