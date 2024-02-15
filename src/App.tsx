@@ -1,9 +1,11 @@
+import AddButton from "components/Button/AddButton";
 import logo from "./logo.svg";
 import "./styles/app.css";
 
 function App() {
   return (
     <div className="App">
+      <AddButton label="Add" />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
