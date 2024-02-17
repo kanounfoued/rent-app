@@ -1,27 +1,18 @@
-import AddButton from "components/Button/AddButton";
-import logo from "./logo.svg";
-import "./styles/app.css";
+import ApiClient from 'api/ApiClient';
+import axiosInstance from 'config/axios.config';
+import { User } from 'models/user.model';
+
+const api = new ApiClient<User>(axiosInstance);
 
 function App() {
-  return (
-    <div className="App">
-      <AddButton />
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="p-8"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  // useEffect(() => {
+  //   (async function name() {
+  //     const { data } = await api.get("/users?size=10");
+  //     console.log(data);
+  //   })();
+  // }, []);
+
+  return <div />;
 }
 
 export default App;
