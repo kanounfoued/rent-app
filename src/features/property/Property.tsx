@@ -1,16 +1,26 @@
-import { useEffect } from 'react';
+import useQueryHook from 'hooks/useQuery.hook';
+import { ENTITIES } from 'models/entities.model';
 
 export default function Property() {
-  useEffect(() => {
-    try {
-      throw {
-        code: 'comethng',
-        error: 'comethng',
-      };
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+  const { isLoading, error, data } = useQueryHook({
+    queryKey: [ENTITIES.PROPERTY],
+    queryFn: () =>
+      fetch('https://api.github.com/repos/TanStack/query').then((res) =>
+        res.json(),
+      ),
+  });
 
-  return <div>Property</div>;
+  if (isLoading) return <div>Loading...</div>;
+
+  if (error) return <div>`An error has occurred: ${error.message}`</div>;
+
+  return (
+    <div>
+      <h1>{data.name}</h1>
+      <p>{data.description}</p>
+      <strong>👀 {data.subscribers_count}</strong>{' '}
+      <strong>✨ {data.stargazers_count}</strong>{' '}
+      <strong>🍴 {data.forks_count}</strong>
+    </div>
+  );
 }
