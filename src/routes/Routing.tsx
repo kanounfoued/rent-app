@@ -1,3 +1,4 @@
+import { PageNotFound } from 'components/PageNotFound';
 import { Signup } from 'features/Signup';
 import { Home } from 'features/home';
 import { Login } from 'features/login';
@@ -19,8 +20,7 @@ export default function Routing() {
     },
     {
       path: '*',
-      element: <Home />,
-      children: [],
+      element: <PageNotFound />,
     },
   ]);
 
@@ -37,7 +37,7 @@ export default function Routing() {
     },
     {
       path: '*',
-      element: <Login />,
+      element: <PageNotFound />,
     },
   ]);
 
