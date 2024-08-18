@@ -1,14 +1,15 @@
-export default interface Api<TDataModel, TRequest, TResponse> {
-  get: (url: string, config?: TRequest) => Promise<TResponse>;
-  delete: (url: string, config?: TRequest) => Promise<TResponse>;
-  put: (
-    url: string,
+export default interface Api<TUrl, TDataModel, TRequestConfig, TResponse> {
+  get: (url: TUrl, config?: TRequestConfig) => Promise<TResponse>;
+  getById: (url: TUrl, config?: TRequestConfig) => Promise<TResponse>;
+  create: (
+    url: TUrl,
     body: Partial<TDataModel> | null,
-    config?: TRequest,
+    config?: TRequestConfig,
   ) => Promise<TResponse>;
-  post: (
-    url: string,
+  update: (
+    url: TUrl,
     body: Partial<TDataModel> | null,
-    config?: TRequest,
+    config?: TRequestConfig,
   ) => Promise<TResponse>;
+  remove: (url: TUrl, config?: TRequestConfig) => Promise<TResponse>;
 }

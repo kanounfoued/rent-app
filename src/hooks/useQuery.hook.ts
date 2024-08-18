@@ -1,15 +1,21 @@
-import { useQuery } from '@tanstack/react-query';
+import { QueryKey, useQuery as useQueryHook } from '@tanstack/react-query';
 
 type Props<TResponse> = {
-  queryKey: Array<string>;
+  queryKey: QueryKey;
   queryFn: () => Promise<TResponse>;
 };
 
-export default function useQueryHook<TResponse>({
+export default function useQuery<TResponse, TError = unknown>({
   queryKey,
   queryFn,
 }: Props<TResponse>) {
-  return useQuery({
+  /**
+   * Per definition
+   * useQuery<TQueryFnData = TResponse, TError, TData, TQueryKey>
+   *
+   * TData = TResponse
+   */
+  return useQueryHook<TResponse, TError>({
     queryKey,
     queryFn,
   });
