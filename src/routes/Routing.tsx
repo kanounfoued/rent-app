@@ -19,7 +19,7 @@ export default function Routing() {
       children: [],
     },
     {
-      path: ROUTES.PROPERTY,
+      path: `${ROUTES.PROPERTY}`,
       element: <Property />,
       errorElement,
       children: [],
@@ -32,13 +32,13 @@ export default function Routing() {
 
   const auth_router = createBrowserRouter([
     {
-      path: ROUTES.LOGIN,
+      path: `${ROUTES.LOGIN}`,
       element: <Login />,
       errorElement,
       children: [],
     },
     {
-      path: ROUTES.SIGNUP,
+      path: `${ROUTES.SIGNUP}`,
       element: <Signup />,
       errorElement,
       children: [],
