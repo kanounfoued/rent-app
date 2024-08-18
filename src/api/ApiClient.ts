@@ -1,8 +1,16 @@
-import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import Api from "models/api.model";
+import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axiosInstance from 'config/axios.config';
+import Api from 'models/api.model';
+import { ENTITIES } from 'models/entities.model';
 
-export default class ApiClient<TDataModel>
-  implements Api<TDataModel, AxiosRequestConfig, AxiosResponse<TDataModel>>
+class ApiClient<TDataModel>
+  implements
+    Api<
+      ENTITIES,
+      TDataModel,
+      AxiosRequestConfig<TDataModel>,
+      AxiosResponse<TDataModel>
+    >
 {
   private readonly axiosInstance: AxiosInstance;
   private readonly default_config: AxiosRequestConfig;
@@ -11,50 +19,64 @@ export default class ApiClient<TDataModel>
     this.axiosInstance = axiosInstance;
     this.default_config = {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     };
   }
 
   get(
-    url: string,
-    config?: AxiosRequestConfig | undefined,
+    entity: ENTITIES,
+    config?: AxiosRequestConfig<Partial<TDataModel>> | undefined,
   ): Promise<AxiosResponse<TDataModel>> {
-    return this.axiosInstance.get(url, {
+    return this.axiosInstance.get(`${entity}`, {
       ...this.default_config,
       ...config,
     });
   }
 
-  put(
-    url: string,
+  getById(
+    entity: ENTITIES,
+    config?: AxiosRequestConfig<Partial<TDataModel>> | undefined,
+  ): Promise<AxiosResponse<TDataModel>> {
+    return this.axiosInstance.get(entity, {
+      ...this.default_config,
+      ...config,
+    });
+  }
+
+  update(
+    entity: ENTITIES,
     body: Partial<TDataModel> | null,
-    config?: AxiosRequestConfig | undefined,
+    config?: AxiosRequestConfig<Partial<TDataModel>> | undefined,
   ): Promise<AxiosResponse<TDataModel>> {
-    return this.axiosInstance.put(url, body, {
+    return this.axiosInstance.put(entity, body, {
       ...this.default_config,
       ...config,
     });
   }
 
-  post(
-    url: string,
+  create(
+    entity: ENTITIES,
     body: Partial<TDataModel> | null,
-    config?: AxiosRequestConfig | undefined,
+    config?: AxiosRequestConfig<Partial<TDataModel>> | undefined,
   ): Promise<AxiosResponse<TDataModel>> {
-    return this.axiosInstance.post(url, body, {
+    return this.axiosInstance.post(entity, body, {
       ...this.default_config,
       ...config,
     });
   }
 
-  delete(
-    url: string,
-    config?: AxiosRequestConfig | undefined,
+  remove(
+    entity: ENTITIES,
+    config?: AxiosRequestConfig<Partial<TDataModel>> | undefined,
   ): Promise<AxiosResponse<TDataModel>> {
-    return this.axiosInstance.delete(url, {
+    return this.axiosInstance.delete(entity, {
       ...this.default_config,
       ...config,
     });
   }
 }
+
+const api = <TDataModel>() => new ApiClient<TDataModel>(axiosInstance);
+
+export { ApiClient, api };
