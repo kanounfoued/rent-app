@@ -1,19 +1,16 @@
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import axiosInstance from 'config/axios.config';
-import Api from 'models/api.model';
+import Api, { QueryParams } from 'models/api.model';
 import { ENTITIES } from 'models/entities.model';
 
 class ApiClient<TDataModel>
   implements
-    Api<
-      ENTITIES,
-      TDataModel,
-      AxiosRequestConfig<TDataModel>,
-      AxiosResponse<TDataModel>
-    >
+    Api<TDataModel, AxiosRequestConfig<TDataModel>, AxiosResponse<TDataModel>>
 {
   private readonly axiosInstance: AxiosInstance;
   private readonly default_config: AxiosRequestConfig;
+
+  readonly url = `api/v1`;
 
   constructor(axiosInstance: AxiosInstance) {
     this.axiosInstance = axiosInstance;
@@ -24,55 +21,87 @@ class ApiClient<TDataModel>
     };
   }
 
-  get(
-    entity: ENTITIES,
-    config?: AxiosRequestConfig<Partial<TDataModel>> | undefined,
-  ): Promise<AxiosResponse<TDataModel>> {
-    return this.axiosInstance.get(`${entity}`, {
+  get({
+    entity,
+    params,
+    config,
+  }: {
+    entity: ENTITIES;
+    params?: QueryParams<TDataModel>;
+    config?: AxiosRequestConfig<Partial<TDataModel>> | undefined;
+  }): Promise<AxiosResponse<TDataModel>> {
+    return this.axiosInstance.get(`${this.url}/${entity}`, {
       ...this.default_config,
       ...config,
+      params,
     });
   }
 
-  getById(
-    entity: ENTITIES,
-    config?: AxiosRequestConfig<Partial<TDataModel>> | undefined,
-  ): Promise<AxiosResponse<TDataModel>> {
-    return this.axiosInstance.get(entity, {
+  getById({
+    entity,
+    params,
+    config,
+  }: {
+    entity: ENTITIES;
+    params?: QueryParams<TDataModel>;
+    config?: AxiosRequestConfig<Partial<TDataModel>> | undefined;
+  }): Promise<AxiosResponse<TDataModel>> {
+    return this.axiosInstance.get(`${this.url}/${entity}`, {
       ...this.default_config,
       ...config,
+      params,
     });
   }
 
-  update(
-    entity: ENTITIES,
-    body: Partial<TDataModel> | null,
-    config?: AxiosRequestConfig<Partial<TDataModel>> | undefined,
-  ): Promise<AxiosResponse<TDataModel>> {
-    return this.axiosInstance.put(entity, body, {
+  update({
+    entity,
+    body,
+    params,
+    config,
+  }: {
+    entity: ENTITIES;
+    params?: QueryParams<TDataModel>;
+    body: Partial<TDataModel> | null;
+    config?: AxiosRequestConfig<Partial<TDataModel>> | undefined;
+  }): Promise<AxiosResponse<TDataModel>> {
+    return this.axiosInstance.put(`${this.url}/${entity}`, body, {
       ...this.default_config,
       ...config,
+      params,
     });
   }
 
-  create(
-    entity: ENTITIES,
-    body: Partial<TDataModel> | null,
-    config?: AxiosRequestConfig<Partial<TDataModel>> | undefined,
-  ): Promise<AxiosResponse<TDataModel>> {
-    return this.axiosInstance.post(entity, body, {
+  create({
+    entity,
+    params,
+    body,
+    config,
+  }: {
+    entity: ENTITIES;
+    params?: QueryParams<TDataModel>;
+    body: Partial<TDataModel> | null;
+    config?: AxiosRequestConfig<Partial<TDataModel>> | undefined;
+  }): Promise<AxiosResponse<TDataModel>> {
+    return this.axiosInstance.post(`${this.url}/${entity}`, body, {
       ...this.default_config,
       ...config,
+      params,
     });
   }
 
-  remove(
-    entity: ENTITIES,
-    config?: AxiosRequestConfig<Partial<TDataModel>> | undefined,
-  ): Promise<AxiosResponse<TDataModel>> {
-    return this.axiosInstance.delete(entity, {
+  remove({
+    entity,
+    params,
+    config,
+  }: {
+    entity: ENTITIES;
+    params?: QueryParams<TDataModel>;
+    config?: AxiosRequestConfig<Partial<TDataModel>> | undefined;
+  }): Promise<AxiosResponse<TDataModel>> {
+    return this.axiosInstance.delete(`${this.url}/${entity}`, {
       ...this.default_config,
       ...config,
+      params,
     });
   }
 }
