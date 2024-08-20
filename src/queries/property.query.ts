@@ -1,39 +1,33 @@
 import { api } from 'api/ApiClient';
 import useQuery from 'hooks/useQuery.hook';
+import { QueryParams } from 'models/api.model';
 import { ENTITIES } from 'models/entities.model';
 import { Property } from 'models/property.model';
 
-export const useGetProperties = () => {
+const queryFactoryKeys = {
+  all: (queryParams?: QueryParams<Property>) =>
+    [ENTITIES.PROPERTY, queryParams] as const,
+  byId: (id: string) => [ENTITIES.PROPERTY, id] as const,
+};
+
+export const useGetProperties = ({
+  queryParams,
+}: {
+  queryParams?: QueryParams<Property>;
+}) => {
   const apiClient = api<Property>();
 
   return useQuery({
-    queryKey: [ENTITIES.PROPERTY],
-    queryFn: () => apiClient.get(ENTITIES.PROPERTY),
+    queryKey: queryFactoryKeys.all(queryParams),
+    queryFn: () => apiClient.get({ entity: ENTITIES.PROPERTY }),
   });
 };
 
-/**
- *
- *
- * unified url
- *
- *
- * create
- *  /entity_name + body
- *
- * update
- * /entity_name + body + id
- *
- *
- * get
- * /entity_name?filters
- *
- *
- * getById
- * /entity_name?filters
- *
- *
- * remove
- * /entity_name?filters
- *
- */
+export const useGetPropertyById = (id: string) => {
+  const apiClient = api<Property>();
+
+  return useQuery({
+    queryKey: queryFactoryKeys.byId(id),
+    queryFn: () => apiClient.getById({ entity: ENTITIES.PROPERTY }),
+  });
+};
