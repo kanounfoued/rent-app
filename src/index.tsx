@@ -2,7 +2,7 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from 'hooks/useQuery.hook';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Routing from 'routes/routing';
+import Router from 'routes/router';
 import reportWebVitals from './reportWebVitals';
 import './styles/index.css';
 
@@ -12,7 +12,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <Routing />
+      <Router />
     </QueryClientProvider>
   </React.StrictMode>,
 );
