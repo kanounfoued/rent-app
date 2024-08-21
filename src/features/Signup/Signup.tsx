@@ -13,7 +13,7 @@ const Signup: React.FC = () => {
   };
 
   return (
-    <div className="w-[300px] flex flex-col items-center my-36 m-auto">
+    <div className="w-[350px] flex flex-col items-center my-36 m-auto">
       <h1 className="mb-8">Signup</h1>
       <Form<SignupFormSchema>
         form={form}

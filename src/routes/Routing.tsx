@@ -1,46 +1,59 @@
-import { ErrorBoundaryFallback } from 'components/ErrorBoundary';
-import { PageNotFound } from 'components/PageNotFound';
-import { Signup } from 'features/Signup';
-import { Home } from 'features/home';
-import { Login } from 'features/login';
-import { Property } from 'features/property';
-import { ReactNode } from 'react';
+import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
+import PageNotFound from 'components/PageNotFound/PageNotFound';
+import Signup from 'features/Signup/Signup';
+import Home from 'features/home/Home';
+import Login from 'features/login/Login';
+import Properties from 'features/property/routes/Properties';
+import Users from 'features/user/routes/Users';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import ROUTES from './routes';
-
-const errorElement: ReactNode = <ErrorBoundaryFallback />;
 
 export default function Routing() {
   const router = createBrowserRouter([
     {
       path: ROUTES.HOME,
       element: <Home />,
-      errorElement,
-      children: [],
-    },
-    {
-      path: `${ROUTES.PROPERTY}`,
-      element: <Property />,
-      errorElement,
-      children: [],
-    },
-    {
-      path: '*',
-      element: <PageNotFound />,
+      ErrorBoundary,
+      children: [
+        {
+          path: ROUTES.PROPERTY,
+          children: [
+            {
+              index: true,
+              element: <Properties />,
+              ErrorBoundary,
+            },
+          ],
+        },
+        {
+          path: ROUTES.USER,
+          children: [
+            {
+              index: true,
+              element: <Users />,
+              ErrorBoundary,
+            },
+          ],
+        },
+        {
+          path: '*',
+          element: <PageNotFound />,
+        },
+      ],
     },
   ]);
 
   const auth_router = createBrowserRouter([
     {
-      path: `${ROUTES.LOGIN}`,
+      path: ROUTES.LOGIN,
       element: <Login />,
-      errorElement,
+      ErrorBoundary,
       children: [],
     },
     {
-      path: `${ROUTES.SIGNUP}`,
+      path: ROUTES.SIGNUP,
       element: <Signup />,
-      errorElement,
+      ErrorBoundary,
       children: [],
     },
     {

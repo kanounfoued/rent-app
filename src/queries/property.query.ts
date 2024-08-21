@@ -15,7 +15,7 @@ export const useGetProperties = ({
 }: {
   queryParams?: QueryParams<Property>;
 }) => {
-  const apiClient = api<Property>();
+  const apiClient = api<Property[]>();
 
   return useQuery({
     queryKey: queryFactoryKeys.all(queryParams),
