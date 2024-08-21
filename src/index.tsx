@@ -1,11 +1,10 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { queryClient } from 'hooks/useQuery.hook';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Routing from 'routes/Routing';
+import Routing from 'routes/routing';
 import reportWebVitals from './reportWebVitals';
 import './styles/index.css';
-
-const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,

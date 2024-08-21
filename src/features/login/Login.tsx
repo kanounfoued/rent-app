@@ -1,6 +1,6 @@
 import { Button, Form, Input, theme } from 'antd';
 import { Link } from 'react-router-dom';
-import { LoginFormSchema } from '../types/login.model';
+import { LoginFormSchema } from './types/login.model';
 
 const Login: React.FC = () => {
   const { colorPrimary } = theme.useToken().token;

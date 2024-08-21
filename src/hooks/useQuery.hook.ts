@@ -1,24 +1,34 @@
-import { QueryKey, useQuery as useQueryHook } from '@tanstack/react-query';
+import {
+  DefinedInitialDataOptions,
+  QueryClient,
+  QueryKey,
+  UseQueryOptions,
+  useQuery as useQueryHook,
+} from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 
-type Props<TResponse> = {
-  queryKey: QueryKey;
-  queryFn: () => Promise<TResponse>;
-};
+export const queryClient = new QueryClient();
 
-export default function useQuery<
-  TResponse,
-  TError = AxiosError<{ message: string }>,
->({ queryKey, queryFn }: Props<TResponse>) {
-  /**
-   * Per definition
-   * useQuery<TQueryFnData = TResponse, TError, TData, TQueryKey>
-   *
-   * TData = TResponse
-   */
+type QueryOptionsProps<
+  TQueryFnData,
+  TError,
+  TData,
+  TQueryKey extends QueryKey = QueryKey,
+> =
+  | UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>
+  | DefinedInitialDataOptions<TQueryFnData, TError, TData, TQueryKey>
+  | UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>;
 
-  return useQueryHook<TResponse, TError>({
-    queryKey,
-    queryFn,
-  });
-}
+const useQuery = <TQueryFnData, TError = AxiosError, TData = TQueryFnData>(
+  options: QueryOptionsProps<TQueryFnData, TError, TData>,
+) =>
+  useQueryHook<TQueryFnData, TError, TData>(
+    {
+      throwOnError: true,
+      retry: 1,
+      ...options,
+    },
+    queryClient,
+  );
+
+export default useQuery;
