@@ -8,7 +8,7 @@ import Users from 'features/user/routes/Users';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import ROUTES from './routes';
 
-export default function Routing() {
+export default function Router() {
   const router = createBrowserRouter([
     {
       path: ROUTES.HOME,
