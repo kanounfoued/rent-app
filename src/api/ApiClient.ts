@@ -3,10 +3,7 @@ import axiosInstance from 'config/axios.config';
 import Api, { QueryParams } from 'models/api.model';
 import { ENTITIES } from 'models/entities.model';
 
-class ApiClient<TDataModel>
-  implements
-    Api<TDataModel, AxiosRequestConfig<TDataModel>, AxiosResponse<TDataModel>>
-{
+class ApiClient<TDataModel> implements Api<TDataModel> {
   private readonly axiosInstance: AxiosInstance;
   private readonly default_config: AxiosRequestConfig;
 
@@ -28,9 +25,13 @@ class ApiClient<TDataModel>
   }: {
     entity: ENTITIES;
     params?: QueryParams<TDataModel>;
-    config?: AxiosRequestConfig<Partial<TDataModel>> | undefined;
-  }): Promise<AxiosResponse<TDataModel>> {
-    return this.axiosInstance.get(`${this.url}/${entity}`, {
+    config?: AxiosRequestConfig<Partial<TDataModel>>;
+  }) {
+    return this.axiosInstance.get<
+      TDataModel,
+      AxiosResponse<TDataModel[]>,
+      TDataModel
+    >(`${this.url}/${entity}`, {
       ...this.default_config,
       ...config,
       params,
@@ -45,8 +46,12 @@ class ApiClient<TDataModel>
     entity: ENTITIES;
     params?: QueryParams<TDataModel>;
     config?: AxiosRequestConfig<Partial<TDataModel>> | undefined;
-  }): Promise<AxiosResponse<TDataModel>> {
-    return this.axiosInstance.get(`${this.url}/${entity}`, {
+  }) {
+    return this.axiosInstance.get<
+      TDataModel,
+      AxiosResponse<TDataModel>,
+      TDataModel
+    >(`${this.url}/${entity}`, {
       ...this.default_config,
       ...config,
       params,
@@ -63,8 +68,12 @@ class ApiClient<TDataModel>
     params?: QueryParams<TDataModel>;
     body: Partial<TDataModel> | null;
     config?: AxiosRequestConfig<Partial<TDataModel>> | undefined;
-  }): Promise<AxiosResponse<TDataModel>> {
-    return this.axiosInstance.put(`${this.url}/${entity}`, body, {
+  }) {
+    return this.axiosInstance.put<
+      TDataModel,
+      AxiosResponse<TDataModel>,
+      Partial<TDataModel> | null
+    >(`${this.url}/${entity}/update`, body, {
       ...this.default_config,
       ...config,
       params,
@@ -81,8 +90,12 @@ class ApiClient<TDataModel>
     params?: QueryParams<TDataModel>;
     body: Partial<TDataModel> | null;
     config?: AxiosRequestConfig<Partial<TDataModel>> | undefined;
-  }): Promise<AxiosResponse<TDataModel>> {
-    return this.axiosInstance.post(`${this.url}/${entity}`, body, {
+  }) {
+    return this.axiosInstance.post<
+      TDataModel,
+      AxiosResponse<TDataModel>,
+      Partial<TDataModel> | null
+    >(`${this.url}/${entity}/create`, body, {
       ...this.default_config,
       ...config,
       params,
@@ -97,8 +110,12 @@ class ApiClient<TDataModel>
     entity: ENTITIES;
     params?: QueryParams<TDataModel>;
     config?: AxiosRequestConfig<Partial<TDataModel>> | undefined;
-  }): Promise<AxiosResponse<TDataModel>> {
-    return this.axiosInstance.delete(`${this.url}/${entity}`, {
+  }) {
+    return this.axiosInstance.delete<
+      TDataModel,
+      AxiosResponse<TDataModel>,
+      TDataModel
+    >(`${this.url}/${entity}`, {
       ...this.default_config,
       ...config,
       params,
@@ -106,6 +123,19 @@ class ApiClient<TDataModel>
   }
 }
 
-const api = <TDataModel>() => new ApiClient<TDataModel>(axiosInstance);
+const useApi = <TDataModel>() => {
+  // get the token
+  // get the logout method
 
-export { ApiClient, api };
+  const api = new ApiClient<TDataModel>(
+    axiosInstance({
+      baseURL: '',
+      token: '',
+      logout: () => {},
+    }),
+  );
+
+  return api;
+};
+
+export { ApiClient, useApi };
