@@ -1,27 +1,36 @@
 import axios from 'axios';
 
-const BASE_URL = process.env.REACT_APP_API_URL;
+type Props = {
+  baseURL: string;
+  token?: string;
+  logout: () => void;
+};
 
-const axiosInstance = axios.create({
-  baseURL: BASE_URL,
-});
+export default ({ baseURL, token, logout }: Props) => {
+  const axiosInstance = axios.create({
+    baseURL: baseURL,
+  });
 
-axiosInstance.interceptors.request.use(
-  (config) => {
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  },
-);
+  axiosInstance.interceptors.request.use(
+    (config) => {
+      config.headers.Authorization = `Bearer ${token}`;
 
-axiosInstance.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  (error) => {
-    return Promise.reject(error);
-  },
-);
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
+    },
+  );
 
-export default axiosInstance;
+  axiosInstance.interceptors.response.use(
+    (response) => {
+      if (response.status === 401) logout();
+      return response;
+    },
+    (error) => {
+      return Promise.reject(error);
+    },
+  );
+
+  return axiosInstance;
+};
