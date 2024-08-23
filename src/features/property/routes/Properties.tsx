@@ -1,7 +1,11 @@
-import { useGetProperties } from 'queries/property.query';
+import { usePropertyApi } from 'queries/property.query';
 
 export default function Properties() {
-  const { data: properties, isLoading, error } = useGetProperties({});
+  const {
+    data: properties,
+    isLoading,
+    error,
+  } = usePropertyApi().useGetProperties();
 
   if (isLoading) return <div>Loading...</div>;
 

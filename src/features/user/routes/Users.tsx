@@ -1,7 +1,7 @@
-import { useGetUsers } from 'queries/user.query';
+import { useUserApi } from 'queries/user.query';
 
 export default function Users() {
-  const { data: users, isLoading } = useGetUsers({});
+  const { data: users, isLoading } = useUserApi().useGetUsers();
 
   if (isLoading) return <div>Loading...</div>;
 
