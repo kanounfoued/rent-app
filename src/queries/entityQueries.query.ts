@@ -1,4 +1,4 @@
-import { QueryKey, useQuery } from '@tanstack/react-query';
+import { QueryKey, useMutation, useQuery } from '@tanstack/react-query';
 import { useApi } from 'api/ApiClient';
 import { queryClient } from 'hooks/useQuery.hook';
 import { QueryParams } from 'models/api.model';
@@ -37,16 +37,49 @@ export const useEntityQueries = <TDataModel = Entity>(entity: ENTITIES) => {
     });
   };
 
-  const useCreate = () => {
-    return null;
+  const useCreate = ({
+    entity,
+    body,
+  }: {
+    entity: ENTITIES;
+    body: Partial<TDataModel>;
+  }) => {
+    const api = useApi<TDataModel>();
+
+    return useMutation({
+      mutationKey: queryFactoryKeys(entity).all(),
+      mutationFn: () => api.create({ entity, body }),
+    });
   };
 
-  const useUpdate = () => {
-    return null;
+  const useUpdate = ({
+    entity,
+    body,
+  }: {
+    entity: ENTITIES;
+    body: Partial<TDataModel>;
+  }) => {
+    const api = useApi<TDataModel>();
+
+    return useMutation({
+      mutationKey: queryFactoryKeys(entity).all(),
+      mutationFn: () => api.update({ entity, body }),
+    });
   };
 
-  const useDelete = () => {
-    return null;
+  const useDelete = ({
+    entity,
+    params,
+  }: {
+    entity: ENTITIES;
+    params: QueryParams<TDataModel>;
+  }) => {
+    const api = useApi<TDataModel>();
+
+    return useMutation({
+      mutationKey: queryFactoryKeys(entity).all(),
+      mutationFn: () => api.remove({ entity, params }),
+    });
   };
 
   return {
