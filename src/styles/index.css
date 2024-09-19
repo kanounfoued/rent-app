@@ -1,3 +1,57 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --light-50: #f0fff6;
+  --light-100: #e6fff1;
+  --light-200: #bdffdd;
+  --light-300: #92fcc9;
+  --light-400: #65f0b1;
+  --light-500: #3be49d;
+  --light-600: #28bd84;
+  --light-700: #18966a;
+  --light-800: #0c7051;
+  --light-900: #074a37;
+
+  --header-bg: #fff;
+  --sider-bg: #fff;
+  --footer-bg: #fff;
+  --color-bg-container: #fff;
+  --color-bg-layout: #fff;
+  --color-bg-base: #eee;
+  --color-text-heading: #5b5959;
+  --color-text-base: #6b6a6a;
+  --color-border: #ccc;
+  --box-shadow: 0 6px 16px 0 #00000014, 0 3px 6px -4px #0000001f,
+    0 9px 28px 8px #0000000d;
+
+  --color-primary: #18966a;
+}
+
+:root[data-theme='dark'] {
+  --dark-50: #e2faed;
+  --dark-100: #b8f8d7;
+  --dark-200: #8cf0c0;
+  --dark-300: #5ddaa1;
+  --dark-400: #35c588;
+  --dark-500: #2d9b6d;
+  --dark-600: #267252;
+  --dark-700: #20523d;
+  --dark-800: #193e30;
+  --dark-900: #152821;
+
+  --header-bg: #2d2c2d;
+  --sider-bg: #2d2c2d;
+  --footer-bg: #2d2c2d;
+  --color-bg-container: #2d2c2d;
+  --color-bg-layout: #2d2c2d;
+  --color-bg-base: #2d2c2d;
+  --color-text-heading: #ccc;
+  --color-text-base: #aeadad;
+  --color-border: #aeadad;
+  --box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.078),
+    0 3px 6px -4px rgba(0, 0, 0, 0.122), 0 9px 28px 8px rgba(0, 0, 0, 0.051);
+
+  --color-primary: #18966a;
+}
