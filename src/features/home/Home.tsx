@@ -48,6 +48,7 @@ const Home: React.FC = () => {
       >
         <div className="demo-logo" />
         <Menu
+          className="border-b-0"
           theme="light"
           mode="horizontal"
           defaultSelectedKeys={['2']}
