@@ -18,14 +18,14 @@ export default function App() {
           colorTextHeading: computedStyle.getPropertyValue(
             '--color-text-heading',
           ),
-          colorLink: computedStyle.getPropertyValue('--color-primary'),
+          colorLink: computedStyle.getPropertyValue('--color-link'),
           colorPrimary: computedStyle.getPropertyValue('--color-primary'),
 
           colorBorder: computedStyle.getPropertyValue('--color-border'),
           colorBorderSecondary:
             computedStyle.getPropertyValue('--color-border'),
           colorPrimaryBorder: computedStyle.getPropertyValue('--color-border'),
-          colorBorderBg: computedStyle.getPropertyValue('--color-border'),
+          colorBorderBg: 'red',
 
           colorBgLayout: computedStyle.getPropertyValue('--color-bg-layout'),
           colorBgContainer: computedStyle.getPropertyValue(
@@ -38,9 +38,25 @@ export default function App() {
             siderBg: computedStyle.getPropertyValue('--sider-bg'),
             footerBg: computedStyle.getPropertyValue('--footer-bg'),
           },
+          Menu: {
+            itemSelectedBg: computedStyle.getPropertyValue(
+              '--color-secondary-selected',
+            ),
+            itemActiveBg: computedStyle.getPropertyValue(
+              '--color-secondary-active',
+            ),
+            subMenuItemBg: computedStyle.getPropertyValue(
+              '--sub-menu-bg-color',
+            ),
+          },
           Button: {
             primaryShadow: computedStyle.getPropertyValue('--box-shadow'),
-            // boxShadowSecondary: computedStyle.getPropertyValue('--box-shadow'),
+            primaryColor: computedStyle.getPropertyValue(
+              '--btn-primary-color-text',
+            ),
+            colorTextLightSolid: computedStyle.getPropertyValue(
+              '--btn-primary-color-text',
+            ),
           },
         },
       }}
