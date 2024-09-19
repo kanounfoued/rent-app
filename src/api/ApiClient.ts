@@ -131,7 +131,9 @@ const useApi = <TDataModel>() => {
     axiosInstance({
       baseURL: '',
       token: '',
-      logout: () => {},
+      logout: () => {
+        console.log('logout');
+      },
     }),
   );
 
