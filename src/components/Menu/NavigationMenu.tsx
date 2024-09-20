@@ -5,7 +5,7 @@ import {
 } from '@ant-design/icons';
 import { Affix, Menu, MenuProps } from 'antd';
 import { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useIntersectionObserver, useResizeObserver } from 'usehooks-ts';
 import './navigationMenu.css';
 
@@ -30,7 +30,10 @@ const items: MenuItem[] = [
 
 export default function NavigationMenu() {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const ref = useRef<HTMLElement>(document.body as HTMLElement);
+
+  const activeMenuItem = pathname.split('/')[1];
 
   const { width = 0 } = useResizeObserver({
     ref,
@@ -39,7 +42,9 @@ export default function NavigationMenu() {
   const { ref: menuRef, entry } = useIntersectionObserver();
   const menuWidth = entry?.boundingClientRect?.width ?? 0;
 
-  const [current, setCurrent] = useState<BaseRoutes>('property');
+  const [current, setCurrent] = useState<BaseRoutes>(
+    activeMenuItem as BaseRoutes,
+  );
 
   const onClick: MenuProps['onClick'] = (e) => {
     setCurrent(e.key as BaseRoutes);
