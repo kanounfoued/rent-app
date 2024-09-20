@@ -48,6 +48,9 @@ export default function App() {
             subMenuItemBg: computedStyle.getPropertyValue(
               '--sub-menu-bg-color',
             ),
+            horizontalItemSelectedColor: computedStyle.getPropertyValue(
+              '--color-horizonral-menu-selected-icon',
+            ),
           },
           Button: {
             primaryShadow: computedStyle.getPropertyValue('--box-shadow'),
