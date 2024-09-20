@@ -1,4 +1,3 @@
-import { Typography } from 'antd';
 import { usePropertyApi } from 'queries/property.query';
 
 export default function Properties() {
@@ -14,7 +13,6 @@ export default function Properties() {
 
   return (
     <div>
-      <Typography.Text>asdfjn</Typography.Text>
       {properties?.data.map((property) => (
         <>
           <h1>Flat {property?.id}</h1>
