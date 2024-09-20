@@ -1,3 +1,4 @@
+import Breadcrumb from 'components/Breadcrumb';
 import { usePropertyApi } from 'queries/property.query';
 
 export default function Properties() {
@@ -13,6 +14,7 @@ export default function Properties() {
 
   return (
     <div>
+      <Breadcrumb items={[{ title: 'properties' }]} />
       {properties?.data.map((property) => (
         <>
           <h1>Flat {property?.id}</h1>

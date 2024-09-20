@@ -1,9 +1,11 @@
 import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
 import PageNotFound from 'components/PageNotFound/PageNotFound';
 import Signup from 'features/Signup/Signup';
+import Contracts from 'features/contract/routes/contracts';
 import Home from 'features/home/Home';
 import Login from 'features/login/Login';
 import Properties from 'features/property/routes/Properties';
+import Transactions from 'features/transaction/routes/transactions';
 import Users from 'features/user/routes/Users';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import ROUTES from './routes';
@@ -26,10 +28,29 @@ export default function Router() {
           ],
         },
         {
-          path: ROUTES.USER,
+          path: ROUTES.CONTRACT,
           children: [
             {
               index: true,
+              element: <Contracts />,
+              ErrorBoundary,
+            },
+          ],
+        },
+        {
+          path: ROUTES.TRANSACTION,
+          children: [
+            {
+              index: true,
+              element: <Transactions />,
+              ErrorBoundary,
+            },
+          ],
+        },
+        {
+          path: ROUTES.USER,
+          children: [
+            {
               element: <Users />,
               ErrorBoundary,
             },

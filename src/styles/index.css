@@ -73,10 +73,14 @@
   --color-text-heading: var(--color-text);
   --color-text-base: var(--color-text);
 
+  /* Menu */
   --color-secondary-selected: var(--color-secondary-30);
   --color-secondary-active: var(--color-secondary-90);
   --sub-menu-bg-color: var(--color-secondary-10);
   --color-horizonral-menu-selected-icon: var(--color-accent-90);
+
+  /* Breadcrumb */
+  --bg-color-breadcrumb: var(--color-accent-10);
 
   --btn-primary-color-text: var(--bg-color-90);
   --btn-primary-color-text-light: var(--bg-color-90);
