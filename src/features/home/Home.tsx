@@ -5,22 +5,18 @@ import {
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Layout, Menu } from 'antd';
+import NavigationMenu from 'components/Menu/NavigationMenu';
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
-const { Header, Content, Sider } = Layout;
-
-const items1: MenuProps['items'] = ['1', '2', '3', '4'].map((key) => ({
-  key,
-  label: `nav ${key}`,
-}));
+const { Content, Sider } = Layout;
 
 const items2: MenuProps['items'] = [
   UserOutlined,
   LaptopOutlined,
   NotificationOutlined,
 ].map((icon, index) => {
-  const key = String(index + 1);
+  const key = `${index} + 1`;
 
   return {
     key: `sub${key}`,
@@ -40,42 +36,21 @@ const items2: MenuProps['items'] = [
 const Home: React.FC = () => {
   return (
     <Layout className="h-screen">
-      <Header
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-        }}
-      >
-        <div className="demo-logo" />
-        <Menu
-          className="border-b-0"
-          theme="light"
-          mode="horizontal"
-          defaultSelectedKeys={['2']}
-          items={items1}
-          style={{ flex: 1, minWidth: 0 }}
-        />
-      </Header>
       <Layout>
-        <Sider className="overflow-auto border-r" width={240}>
+        <Sider className="overflow-auto border-r !min-w-[240px] !w-[240px]">
           <Menu
+            className="h-full border-r-0"
             mode="inline"
             defaultSelectedKeys={['1']}
             defaultOpenKeys={['sub1']}
-            style={{ height: '100%', borderRight: 0 }}
             items={items2}
             theme="light"
           />
         </Sider>
         <Layout>
-          <Content
-            style={{
-              padding: 24,
-              margin: 0,
-              minHeight: 280,
-            }}
-          >
+          <Content className="min-h-[280px] m-0 h-full overflow-y-auto p-6">
             <Outlet />
+            <NavigationMenu />
           </Content>
         </Layout>
       </Layout>
