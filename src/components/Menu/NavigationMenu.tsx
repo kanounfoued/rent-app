@@ -1,9 +1,7 @@
-import {
-  FileTextOutlined,
-  HomeOutlined,
-  TransactionOutlined,
-} from '@ant-design/icons';
 import { Affix, Menu, MenuProps } from 'antd';
+import ContractIcon from 'assets/icons/ContractIcon';
+import PropertyIcon from 'assets/icons/PropertyIcon';
+import TransactionIcon from 'assets/icons/TransactionIcon';
 import { useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useIntersectionObserver, useResizeObserver } from 'usehooks-ts';
@@ -13,18 +11,20 @@ type MenuItem = Required<MenuProps>['items'][number];
 
 type BaseRoutes = 'property' | 'contract' | 'transaction';
 
+const iconSize = '40px';
+
 const items: MenuItem[] = [
   {
     key: 'property',
-    icon: <HomeOutlined className="!text-[2.5rem]" />,
+    icon: <PropertyIcon height={iconSize} width={iconSize} />,
   },
   {
     key: 'contract',
-    icon: <FileTextOutlined className="!text-[2.5rem]" />,
+    icon: <ContractIcon height={iconSize} width={iconSize} />,
   },
   {
     key: 'transaction',
-    icon: <TransactionOutlined className="!text-[2.5rem]" />,
+    icon: <TransactionIcon height={iconSize} width={iconSize} />,
   },
 ];
 
@@ -46,6 +46,10 @@ export default function NavigationMenu() {
     activeMenuItem as BaseRoutes,
   );
 
+  const selectable = !['profile', 'settings', 'logout'].includes(
+    activeMenuItem,
+  );
+
   const onClick: MenuProps['onClick'] = (e) => {
     setCurrent(e.key as BaseRoutes);
     navigate(e.key);
@@ -63,7 +67,7 @@ export default function NavigationMenu() {
           className="p-3 h-[70px] border rounded-[1.5rem] bg-[var(--color-accent-10)]"
           items={items}
           onClick={onClick}
-          selectedKeys={[current]}
+          selectedKeys={selectable ? [current] : []}
           mode="horizontal"
         />
       </div>
