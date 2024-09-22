@@ -4,12 +4,11 @@ import PropertyIcon from 'assets/icons/PropertyIcon';
 import TransactionIcon from 'assets/icons/TransactionIcon';
 import { useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { BaseRoutes } from 'routes/routes';
 import { useIntersectionObserver, useResizeObserver } from 'usehooks-ts';
 import './navigationMenu.css';
 
 type MenuItem = Required<MenuProps>['items'][number];
-
-type BaseRoutes = 'property' | 'contract' | 'transaction';
 
 const iconSize = '40px';
 
