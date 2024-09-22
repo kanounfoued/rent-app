@@ -7,7 +7,11 @@ import Login from 'features/login/Login';
 import Properties from 'features/property/routes/Properties';
 import Transactions from 'features/transaction/routes/transactions';
 import Users from 'features/user/routes/Users';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import {
+  Navigate,
+  RouterProvider,
+  createBrowserRouter,
+} from 'react-router-dom';
 import ROUTES from './routes';
 
 export default function Router() {
@@ -21,8 +25,24 @@ export default function Router() {
           path: ROUTES.PROPERTY,
           children: [
             {
-              index: true,
+              path: 'browse',
               element: <Properties />,
+              ErrorBoundary,
+            },
+            {
+              path: 'me',
+              element: <Properties />,
+              ErrorBoundary,
+            },
+            {
+              path: 'favorite',
+              element: <Properties />,
+              ErrorBoundary,
+            },
+            {
+              index: true,
+              path: '*',
+              element: <Navigate to="browse" replace />,
               ErrorBoundary,
             },
           ],
@@ -31,8 +51,14 @@ export default function Router() {
           path: ROUTES.CONTRACT,
           children: [
             {
-              index: true,
+              path: 'me',
               element: <Contracts />,
+              ErrorBoundary,
+            },
+            {
+              index: true,
+              path: '*',
+              element: <Navigate to="me" replace />,
               ErrorBoundary,
             },
           ],
@@ -41,8 +67,34 @@ export default function Router() {
           path: ROUTES.TRANSACTION,
           children: [
             {
-              index: true,
+              path: 'me',
               element: <Transactions />,
+              ErrorBoundary,
+            },
+            {
+              index: true,
+              path: '*',
+              element: <Navigate to="me" replace />,
+              ErrorBoundary,
+            },
+          ],
+        },
+        {
+          path: ROUTES.PROFILE,
+          children: [
+            {
+              index: true,
+              element: <div>Profile</div>,
+              ErrorBoundary,
+            },
+          ],
+        },
+        {
+          path: ROUTES.SETTINGS,
+          children: [
+            {
+              index: true,
+              element: <div>SETTINGS</div>,
               ErrorBoundary,
             },
           ],

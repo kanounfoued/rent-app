@@ -7,7 +7,7 @@ export default function LogoIcon() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_11_595)">
+      <g clipPath="url(#clip0_11_595)">
         <path
           d="M39.0575 24.9267L34.9064 27.0831L43.8557 44.3101L48.0068 42.1536L39.0575 24.9267Z"
           fill="#EEA86C"
