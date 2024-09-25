@@ -63,7 +63,7 @@ export default function NavigationMenu() {
     >
       <div ref={menuRef}>
         <Menu
-          className="p-3 h-[70px] border rounded-[1.5rem] bg-[var(--color-accent-10)]"
+          className="p-3 h-[70px] border rounded-[1.5rem] bg-[var(--color-accent-50)]"
           items={items}
           onClick={onClick}
           selectedKeys={selectable ? [current] : []}

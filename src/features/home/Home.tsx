@@ -12,7 +12,7 @@ const Home: React.FC = () => {
       <Layout>
         <HomeSider />
         <Layout>
-          <Content className="min-h-[280px] m-0 h-full overflow-y-auto p-6">
+          <Content className="min-h-[280px] m-0 h-full overflow-y-auto p-6 pb-24">
             <Outlet />
             <NavigationMenu />
           </Content>
