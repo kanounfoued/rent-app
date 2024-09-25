@@ -4,6 +4,7 @@ import Signup from 'features/Signup/Signup';
 import Contracts from 'features/contract/routes/contracts';
 import Home from 'features/home/Home';
 import Login from 'features/login/Login';
+import Profile from 'features/profile/profile';
 import Properties from 'features/property/routes/Properties';
 import Transactions from 'features/transaction/routes/transactions';
 import Users from 'features/user/routes/Users';
@@ -84,7 +85,7 @@ export default function Router() {
           children: [
             {
               index: true,
-              element: <div>Profile</div>,
+              element: <Profile />,
               ErrorBoundary,
             },
           ],
