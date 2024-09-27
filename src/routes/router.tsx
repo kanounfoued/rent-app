@@ -14,6 +14,7 @@ import {
   createBrowserRouter,
 } from 'react-router-dom';
 import ROUTES from './routes';
+import Settings from 'features/settings/settings';
 
 export default function Router() {
   const router = createBrowserRouter([
@@ -95,7 +96,7 @@ export default function Router() {
           children: [
             {
               index: true,
-              element: <div>SETTINGS</div>,
+              element: <Settings />,
               ErrorBoundary,
             },
           ],
