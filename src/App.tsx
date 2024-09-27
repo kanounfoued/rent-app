@@ -61,6 +61,15 @@ export default function App() {
               '--btn-primary-color-text',
             ),
           },
+          Segmented: {
+            itemSelectedBg: computedStyle.getPropertyValue(
+              '--color-secondary-selected',
+            ),
+            itemActiveBg: computedStyle.getPropertyValue(
+              '--color-secondary-active',
+            ),
+            colorText: computedStyle.getPropertyValue('--color-primary'),
+          },
         },
       }}
     >
